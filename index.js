@@ -5,10 +5,14 @@ import postRoutes from "./routes/posts.js";
 import cookieParser from "cookie-parser";
 import multer from "multer";
 import db from "./db.js";
-import testroute from "./routes/test.js"
+import testroute from "./routes/test.js";
+import cors from "cors";
+import morgan from "morgan"
 
 const app = express();
 
+app.use(morgan('dev'));
+app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 const storage = multer.diskStorage({
@@ -20,10 +24,10 @@ const storage = multer.diskStorage({
   },
 });
 
-db.connect((err)=>{
-  if(err){
-    console.log( err);
-  } 
+db.connect((err) => {
+  if (err) {
+    console.log(err);
+  }
   else console.log("Connected to database");
 })
 
@@ -39,6 +43,10 @@ app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/test", testroute);
 
-app.listen(8800, () => {
-  console.log("Connected!");
+app.get("/", (req, res) => {
+  res.json("Hello")
+})
+
+app.listen(8080, () => {
+  console.log("Connected! in 8080");
 });
