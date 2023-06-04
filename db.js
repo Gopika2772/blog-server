@@ -1,10 +1,9 @@
-import mysql from "mysql"
+import mysql from "mysql2"
 
 const db = mysql.createConnection({
-  host:"bzl1y4zf0maa6kmd5f5h-mysql.services.clever-cloud.com",
-  user:"uspmrbmlxongrkzv",
-  password:"5Tgkwecaj53JKTf0eoGp",
-  database:"bzl1y4zf0maa6kmd5f5h"
-})
+  host: "localhost",
+  database: "blog",
+  user: "root",
 
+});
 export default db
